@@ -79,8 +79,9 @@ export function mountHeroGrass(canvas, opts = {}) {
   });
   group.scale.setScalar(markScale);
   // the mark's local baseline is at -35; drop just its foot into the blades
-  let restY = 0;
+  let restY = 0, seatX = 0, seatZ = 0;
   function seat(x, z) {
+    seatX = x; seatZ = z;
     restY = field.getYPosition(x, z) + 35 * markScale + 0.62;
     return restY;
   }
@@ -305,6 +306,11 @@ export function mountHeroGrass(canvas, opts = {}) {
     }
     camera.updateProjectionMatrix();
     fitMark(fit[0], fit[1]);
+    // Re-seat at the fitted scale. Seating depends on the current scale, so
+    // doing it before the fit leaves the mark floating on wide screens and
+    // sunk into the field on narrow ones.
+    group.position.y = seat(seatX, seatZ);
+    group.updateMatrixWorld(true);
   }
 
   resize();

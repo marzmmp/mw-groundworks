@@ -148,18 +148,71 @@
       b.addEventListener('click', function () { if (i > 0) { i--; paint(); } });
     });
 
+    function succeed() {
+      steps.forEach(function (s) { s.classList.remove('on'); });
+      if (bar) bar.style.display = 'none';
+      if (count) count.style.display = 'none';
+      if (done) { done.hidden = false; done.setAttribute('tabindex', '-1'); done.focus(); }
+    }
+
+    /* Last resort: hand the lead to the visitor's mail client, pre-filled.
+       Losing a job because a Worker was down is unacceptable for a business
+       whose whole pitch is "we call you back the same day". */
+    function mailFallback(data, to, biz) {
+      var body = Object.keys(data).map(function (k) {
+        return k.replace(/^\w/, function (c) { return c.toUpperCase(); }) + ': ' + data[k];
+      }).join('\n');
+      var href = 'mailto:' + to
+        + '?subject=' + encodeURIComponent('Estimate request — ' + (data.need || 'general'))
+        + '&body=' + encodeURIComponent(body + '\n\n— sent from the ' + biz + ' website');
+      window.location.href = href;
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!valid(steps[i])) return;
+
+      // Bots fill every field they can see, including the one nobody can.
+      var hp = form.querySelector('[data-honeypot]');
+      if (hp && hp.value) { succeed(); return; }
+
       var btn = form.querySelector('[type=submit]');
+      var label = btn ? btn.textContent : '';
       if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
-      // No backend is wired yet — see README "Connecting the quote form".
-      window.setTimeout(function () {
-        steps.forEach(function (s) { s.classList.remove('on'); });
-        if (bar) bar.style.display = 'none';
-        if (count) count.style.display = 'none';
-        if (done) { done.hidden = false; done.setAttribute('tabindex', '-1'); done.focus(); }
-      }, 550);
+
+      var data = {};
+      new FormData(form).forEach(function (v, k) { if (k !== 'company') data[k] = v; });
+      data.page = window.location.pathname;
+
+      var endpoint = form.getAttribute('data-endpoint');
+      var to = form.getAttribute('data-mailto');
+      var biz = form.getAttribute('data-biz') || 'the';
+
+      if (!endpoint) {
+        // No backend configured. Do NOT show a success state — an unsent form
+        // that says "Request sent" is worse than no form at all.
+        if (btn) { btn.disabled = false; btn.textContent = label; }
+        mailFallback(data, to, biz);
+        return;
+      }
+
+      var ctl = new AbortController();
+      var timer = window.setTimeout(function () { ctl.abort(); }, 9000);
+
+      window.fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+        signal: ctl.signal
+      }).then(function (r) {
+        window.clearTimeout(timer);
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        succeed();
+      }).catch(function () {
+        window.clearTimeout(timer);
+        if (btn) { btn.disabled = false; btn.textContent = label; }
+        mailFallback(data, to, biz);
+      });
     });
 
     paint();

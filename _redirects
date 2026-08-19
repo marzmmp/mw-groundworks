@@ -1,0 +1,3 @@
+# One canonical hostname. Two hostnames serving the same pages splits the
+# search signal and makes the analytics lie.
+https://www.mnwgroundworks.com/*  https://mnwgroundworks.com/:splat  301

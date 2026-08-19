@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mwgroundworks.com/sitemap.xml
+Sitemap: https://mnwgroundworks.com/sitemap.xml
