@@ -1,0 +1,16 @@
+{
+  "name": "mw-groundworks",
+  "private": true,
+  "description": "M&W GroundWorks — static site. See START-HERE-PROMPT.md",
+  "scripts": {
+    "serve": "cd website && python3 -m http.server 8787",
+    "build": "python3 tools/build_site.py",
+    "build:logos": "python3 tools/make_logos.py",
+    "build:grass": "python3 tools/make_grass_module.py",
+    "build:offline": "python3 tools/make_offline.py",
+    "test:audit": "node tools/audit.js",
+    "test:interact": "node tools/interact.js",
+    "test:daylight": "node tools/daylight_check.js"
+  },
+  "devDependencies": { "playwright": "^1.40.0", "pngjs": "^7.0.0" }
+}

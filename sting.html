@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>M&amp;W GroundWorks — logo sting</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  html,body{margin:0;padding:0;background:#070A08;overflow:hidden;height:100%}
+  #stage{position:relative;width:100vw;height:100vh;overflow:hidden;background:
+    radial-gradient(120% 90% at 50% 42%,#101610 0%,#070A08 68%)}
+  #c{position:absolute;inset:0;width:100%;height:100%}
+  .plate{position:absolute;inset:auto 0 0 0;z-index:2;text-align:center;
+    padding-bottom:8%;opacity:0;transform:translateY(18px)}
+  .plate.on{opacity:1;transform:none}
+  .wm{font-family:var(--font-display);font-weight:700;text-transform:uppercase;
+    color:#F2EDE1;letter-spacing:.02em;line-height:.9;
+    font-size:clamp(2rem,7.2vw,6rem)}
+  .wm em{font-style:normal;color:#9AB85F;display:block;
+    font-size:.44em;letter-spacing:.16em;margin-top:.35em}
+  .strap{margin-top:1.1em;font-family:var(--font-display);font-weight:600;
+    text-transform:uppercase;letter-spacing:.34em;color:#E8A33D;
+    font-size:clamp(.7rem,1.7vw,1.35rem)}
+  .tel{margin-top:.9em;font-family:var(--font-display);font-weight:700;
+    color:#F2EDE1;letter-spacing:.06em;font-size:clamp(.9rem,2.4vw,2rem);opacity:0}
+  .tel.on{opacity:1}
+  .vig{position:absolute;inset:0;z-index:3;pointer-events:none;
+    background:radial-gradient(120% 100% at 50% 45%,transparent 42%,rgba(7,10,8,.72) 100%)}
+</style>
+</head>
+<body>
+<div id="stage">
+  <canvas id="c"></canvas>
+  <div class="vig"></div>
+  <div class="plate" id="plate">
+    <div class="wm">GroundWorks<em>Land &amp; Property Services</em></div>
+    <div class="strap">Clear &middot; Build &middot; Maintain</div>
+    <div class="tel" id="tel">(314) 634-6630 &nbsp;&middot;&nbsp; Jefferson County, MO</div>
+  </div>
+</div>
+<script type="module">
+  import { mountLogo3D } from './assets/js/logo3d.js';
+  const api = mountLogo3D(document.getElementById('c'), { centred: true, terrain: true });
+  const plate = document.getElementById('plate');
+  const tel = document.getElementById('tel');
+  // Offline renderer drives this; nothing animates on its own.
+  window.__seek = (t) => {
+    api.renderAt(t);
+    plate.classList.toggle('on', t > 1.35);
+    tel.classList.toggle('on', t > 2.35);
+    plate.style.transition = 'none'; tel.style.transition = 'none';
+    return true;
+  };
+  window.__ready = true;
+</script>
+</body>
+</html>
