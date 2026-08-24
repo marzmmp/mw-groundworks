@@ -80,6 +80,22 @@ float snoise(vec2 v){
 
 /* ---------- brand presets ------------------------------------------------ */
 export const PRESETS = {
+  // The reference scene's own constants, verbatim from the grass-shader spec.
+  // This is the look the field was actually designed around: saturated green
+  // tips over near-black roots, under a pale blue sky, at exposure 0.58 with a
+  // neutral grade. Every other preset here is a retint of it.
+  reference: {
+    tipColor: '#00994d', bottomColor: '#001a0d',
+    skyTop: '#b3d1ff', skyHorizon: '#b3daff',
+    cloudColor: '#ffffff', cloudCover: 0.5, cloudSpeed: 1.0,
+    sunElevation: 34, sunAzimuth: 150, sunColor: '#fff4d6',
+    hemiSky: '#bcd4ff', hemiGround: '#33502a', hemiIntensity: 0.9,
+    dirColor: '#fff6e0', dirIntensity: 1.6,
+    grade: '#ffffff',
+    groundColor: '#3d5a2b',
+    exposure: 0.58,
+    fogDensity: 0.0072,
+  },
   // Low warm sun. Dark at the zenith so headline text stays readable, warm at
   // the horizon so the amber CTA colour is motivated by the light itself.
   goldenHour: {
@@ -152,7 +168,14 @@ export function createGrassField(scene, opts = {}) {
     THREE.MathUtils.degToRad(C.sunAzimuth)
   );
 
-  if (fog) scene.fog = new THREE.Fog(new THREE.Color(C.skyHorizon), 40, 190);
+  // The reference uses exponential haze so the far grass melts into the sky
+  // with no visible field edge. Linear Fog is kept for the retint presets that
+  // were tuned against it.
+  if (fog) {
+    scene.fog = C.fogDensity
+      ? new THREE.FogExp2(new THREE.Color(C.skyHorizon), C.fogDensity)
+      : new THREE.Fog(new THREE.Color(C.skyHorizon), 40, 190);
+  }
 
   /* ---------- sky dome ---------- */
   const skyUniforms = {
@@ -414,7 +437,7 @@ export function createGrassField(scene, opts = {}) {
   for (let i = 0; i < gp.count; i++) gp.setY(i, getYPosition(gp.getX(i), gp.getZ(i)));
   gGeo.computeVertexNormals();
   const ground = new THREE.Mesh(gGeo, new THREE.MeshStandardMaterial({
-    color: C.bottomColor, roughness: 1,
+    color: C.groundColor || C.bottomColor, roughness: 1,
   }));
   ground.receiveShadow = true;
   scene.add(ground);

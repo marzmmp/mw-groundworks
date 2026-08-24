@@ -10,6 +10,7 @@ import * as THREE from '../vendor/three.module.js';
 import { createGrassField, PRESETS } from './grass.js';
 import { lookForTime, dateAtHour, describe, siteHour } from './daycycle.js';
 import { buildMark } from './mark3d.js';
+import BLADE_TEX from './blade-tex.js';
 
 export function mountHeroGrass(canvas, opts = {}) {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -18,7 +19,9 @@ export function mountHeroGrass(canvas, opts = {}) {
     quality = 'auto',
     markScale = 0.070,
     centred = false,
-    textures = null,
+    // Inlined data URIs. Referencing the JPEGs by path meant the build's
+    // WebP-only image step stripped them and every blade got discarded.
+    textures = BLADE_TEX,
   } = opts;
 
   let renderer;
@@ -38,10 +41,10 @@ export function mountHeroGrass(canvas, opts = {}) {
 
   // Blade count is the single biggest cost. The reference scene uses 190k;
   // a marketing hero does not need that, and phones certainly do not.
-  let instances = 55000;
-  if (quality === 'high') instances = 110000;
+  let instances = 190000;
+  if (quality === 'high') instances = 190000;
   else if (quality === 'low') instances = 12000;
-  else if (small || coarse) instances = 15000;
+  else if (small || coarse) instances = 24000;
   const baseDpr = Math.min(window.devicePixelRatio || 1, small ? 1.6 : 2);
 
   renderer.setPixelRatio(baseDpr);
@@ -67,6 +70,16 @@ export function mountHeroGrass(canvas, opts = {}) {
   });
 
   if (look) field.applyLook(look);
+
+  // The reference scene is graded at 0.58; the old hardcoded 1.05 blew the
+
+  // sky out along the horizon band the hero framing shows.
+
+  if (field.config.exposure !== undefined) {
+
+    renderer.toneMappingExposure = field.config.exposure;
+
+  }
 
   /* ---------- the mark, standing in the field ---------- */
   // In the field the grass supplies all the context, so the tooth bar and
