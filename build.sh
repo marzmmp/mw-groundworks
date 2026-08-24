@@ -31,6 +31,11 @@ find assets/img -type f ! -iname '*.jpg' ! -iname '*.jpeg' -print0 \
       cp "$f" "dist/$f"
     done
 
+# The two grass shader textures ship as-is: they are the fallback behind the
+# inlined data URIs, and a fallback that 404s is not a fallback.
+cp assets/img/blade_diffuse.jpg dist/assets/img/
+cp assets/img/blade_alpha.jpg dist/assets/img/
+
 # JS: only files the production pages actually reference
 mkdir -p dist/assets/js
 # Follow the import graph transitively. Scanning only the HTML would ship
@@ -91,7 +96,38 @@ grep -q 'id="hero3d"' dist/index.html || { echo "FAIL: hero canvas missing from 
 [ -e dist/sting.html ] && { echo "FAIL: sting.html would be published"; fail=1; }
 [ -e dist/assets/video ] && { echo "FAIL: video would be published"; fail=1; }
 [ -e dist/404.html ] || { echo "FAIL: 404.html missing"; fail=1; }
-find dist/assets/img -iname '*.jpg' | grep -q . && { echo "FAIL: JPEG masters would be published"; fail=1; }
+# blade_*.jpg are shader textures, not photographic masters: they are the
+# fallback for the inlined data URIs, so they are meant to ship.
+find dist/assets/img -iname '*.jpg' ! -iname 'blade_*.jpg' | grep -q . && { echo "FAIL: JPEG masters would be published"; fail=1; }
 grep -qE 'href="[A-Za-z0-9._/-]+\.html"' dist/index.html && { echo "FAIL: internal .html links (cost a 308 hop)"; fail=1; }
 
-[ "$fail" -eq 0 ] && echo "guardrails: all pass" || { echo "guardrails: FAILED"; exit 1; }
+# Every asset path referenced from shipped JS must exist in dist/.
+#
+# This guardrail exists because the hero grass shipped with its blade textures
+# stripped. grass.js asked for assets/img/blade_alpha.jpg; the image step
+# publishes WebP only, so it 404'd, the alpha channel sampled as 0, and the
+# fragment shader's `if (alpha < 0.15) discard` threw away all 190000 blades.
+# The page still looked plausible -- a green hill under a working sky -- so
+# nothing caught it. Comments are stripped before scanning, so prose mentioning
+# a path does not trip it.
+missing=0
+for js in dist/assets/js/*.js; do
+  refs=$(sed -e 's://.*::' "$js" \
+         | grep -oE "assets/(img|vendor|video)/[A-Za-z0-9._/-]+\.[a-z0-9]+" \
+         | sort -u || true)   # grep exits 1 on no match, and the script
+                              # runs under set -e -o pipefail
+  for ref in $refs; do
+    if [ ! -f "dist/$ref" ]; then
+      echo "FAIL: $(basename "$js") references $ref, which is not in dist/"
+      missing=1
+    fi
+  done
+done
+[ "$missing" = "1" ] && fail=1
+
+if [ "$fail" -eq 0 ]; then
+  echo "guardrails: all pass"
+else
+  echo "guardrails: FAILED"
+  exit 1
+fi
