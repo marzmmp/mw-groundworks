@@ -1,0 +1,36 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: pages-deploy-main
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build dist/
+        run: |
+          chmod +x build.sh
+          ./build.sh
+
+      - name: Confirm dist/ is what gets uploaded
+        run: |
+          test -d dist || { echo "no dist/ produced"; exit 1; }
+          test ! -e dist/logos.html
+          test ! -e dist/sting.html
+          test -f dist/functions/_middleware.js
+          echo "dist/: $(find dist -type f | wc -l) files"
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=mw-groundworks --branch=main
