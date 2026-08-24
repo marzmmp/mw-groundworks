@@ -1,5 +1,6 @@
 node_modules/
+dist/
+patch_report.txt
+patch2_report.txt
+.wrangler/
 .DS_Store
-*.log
-.env
-.cache/
