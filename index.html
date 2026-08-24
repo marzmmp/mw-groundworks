@@ -269,7 +269,13 @@
 <script type="module">
   import { mountHeroGrass } from './assets/js/hero-grass.js';
   const c = document.getElementById('hero3d');
-  const api = c ? mountHeroGrass(c, { preset: 'daylight' }) : null;
+  // Field is built from the dusk preset, as it always was; the visible look
+  // then comes from the day-cycle model, which is far richer than any flat
+  // preset. Pinned to mid-afternoon rather than the real clock, so the
+  // scene never renders night to a daytime visitor. previewHour also stops
+  // the internal clock, so nothing repaints on a timer.
+  const api = c ? mountHeroGrass(c, { preset: 'dusk' }) : null;
+  if (api) api.previewHour(14);
   window.__heroApi = api;
   // Scroll cue actually scrolls.
   const sc = document.getElementById('hero-scroll');
