@@ -47,9 +47,7 @@
 
 
 <section class="hero">
-  <img class="hero-photo" src="assets/img/hero-jobsite.webp"
-       alt="M&amp;W GroundWorks skid steer clearing overgrown ground in Jefferson County"
-       width="1920" height="1080" fetchpriority="high" decoding="async">
+  <canvas class="hero-canvas" id="hero3d" aria-hidden="true"></canvas>
   <div class="hero-in">
     <div class="wrap-wide">
       <p class="eyebrow">Jefferson County, Missouri</p>
@@ -268,6 +266,20 @@
   </div>
 </div>
 </footer>
+<script type="module">
+  import { mountHeroGrass } from './assets/js/hero-grass.js';
+  const c = document.getElementById('hero3d');
+  const api = c ? mountHeroGrass(c, { preset: 'daylight' }) : null;
+  window.__heroApi = api;
+  // Scroll cue actually scrolls.
+  const sc = document.getElementById('hero-scroll');
+  if (sc) sc.addEventListener('click', () => {
+    const next = document.querySelector('.hero') &&
+      document.querySelector('.hero').nextElementSibling;
+    const target = next && next.nextElementSibling ? next.nextElementSibling : next;
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+</script>
 <script src="assets/js/main.js" defer></script>
 </body>
 </html>

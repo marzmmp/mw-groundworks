@@ -33,24 +33,61 @@ find assets/img -type f ! -iname '*.jpg' ! -iname '*.jpeg' -print0 \
 
 # JS: only files the production pages actually reference
 mkdir -p dist/assets/js
-REFS=$(cat "${PAGES[@]}" | grep -oE 'assets/(js|vendor)/[A-Za-z0-9._/-]+\.js' | sort -u || true)
-for r in $REFS; do
-  if [ -f "$r" ]; then
-    mkdir -p "dist/$(dirname "$r")"
-    cp "$r" "dist/$r"
-  fi
-done
+# Follow the import graph transitively. Scanning only the HTML would ship
+# hero-grass.js without the four modules it imports, and the hero would 404.
+python3 - "${PAGES[@]}" <<'PYRESOLVE'
+import os, re, shutil, sys
+
+pages = sys.argv[1:]
+ref = re.compile(r'assets/(?:js|vendor)/[A-Za-z0-9._/-]+\.js')
+imp = re.compile(
+    r"""(?:from\s*|import\s*)['"]([^'"]+\.js)['"]"""
+)
+
+queue = []
+for p in pages:
+    if os.path.isfile(p):
+        with open(p, encoding='utf-8', errors='replace') as fh:
+            queue += ref.findall(fh.read())
+
+seen = set()
+while queue:
+    rel = os.path.normpath(queue.pop())
+    if rel in seen or not os.path.isfile(rel):
+        continue
+    seen.add(rel)
+    with open(rel, encoding='utf-8', errors='replace') as fh:
+        body = fh.read()
+    base = os.path.dirname(rel)
+    for target in imp.findall(body):
+        if target.startswith('.'):
+            queue.append(os.path.normpath(os.path.join(base, target)))
+
+for rel in sorted(seen):
+    dest = os.path.join('dist', rel)
+    os.makedirs(os.path.dirname(dest), exist_ok=True)
+    shutil.copy2(rel, dest)
+
+print(f"  js graph: {len(seen)} modules shipped")
+PYRESOLVE
+
+# Pages Functions: the same-origin lead endpoint ships with the assets
+if [ -d functions ]; then cp -R functions dist/functions; fi
 
 # no video ships: nothing references it and it is 4.1MB
 if [ -d dist/assets/video ]; then rm -rf dist/assets/video; fi
 
 echo "dist/ built — $(find dist -type f | wc -l | tr -d ' ') files, $(du -sh dist | cut -f1)"
-echo "js included: ${REFS:-none}"
+echo "js: hero grass scene + main.js"
 
 # guardrails: fail loudly rather than quietly shipping a regression
 fail=0
-grep -q 'data-endpoint="https://' dist/contact.html || { echo "FAIL: contact form endpoint is empty"; fail=1; }
-grep -qE 'hero3d|preset-switch|tod-hour' dist/index.html && { echo "FAIL: dev hero artefacts present"; fail=1; }
+grep -q 'data-endpoint="/api/quote"' dist/contact.html || { echo "FAIL: contact form endpoint not wired"; fail=1; }
+[ -f dist/assets/js/hero-grass.js ] || { echo "FAIL: hero module missing from dist"; fail=1; }
+[ -f dist/assets/vendor/three.module.js ] || { echo "FAIL: three.js missing from dist"; fail=1; }
+grep -q 'id="hero3d"' dist/index.html || { echo "FAIL: hero canvas missing from home page"; fail=1; }
+[ -f dist/functions/api/quote.js ] || { echo "FAIL: lead endpoint missing from dist"; fail=1; }
+grep -qE 'preset-switch|tod-hour' dist/index.html && { echo "FAIL: dev time-of-day scrubber present"; fail=1; }
 [ -e dist/logos.html ] && { echo "FAIL: logos.html would be published"; fail=1; }
 [ -e dist/sting.html ] && { echo "FAIL: sting.html would be published"; fail=1; }
 [ -e dist/assets/video ] && { echo "FAIL: video would be published"; fail=1; }
