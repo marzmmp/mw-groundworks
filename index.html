@@ -26,28 +26,30 @@
 <a class="skip" href="#main">Skip to content</a>
 <header class="nav">
 <div class="nav-in">
-  <a class="nav-logo" href="index.html" aria-label="M&W GroundWorks — home">
+  <a class="nav-logo" href="/" aria-label="M&W GroundWorks — home">
     <img src="assets/logos/nav-lockup.svg" alt="M&W GroundWorks" width="266" height="92">
   </a>
   <button class="burger" aria-expanded="false" aria-controls="nav-links" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
   <ul class="nav-links" id="nav-links">
-    <li><a href="index.html" aria-current="page">Home</a></li><li><a href="services.html">Services</a></li><li><a href="work.html">Our Work</a></li><li><a href="service-area.html">Service Area</a></li><li><a href="about.html">About</a></li>
-    <li class="nav-cta"><a class="btn btn-primary" href="contact.html">Free Estimate</a></li>
+    <li><a href="/" aria-current="page">Home</a></li><li><a href="/services">Services</a></li><li><a href="/work">Our Work</a></li><li><a href="/service-area">Service Area</a></li><li><a href="/about">About</a></li>
+    <li class="nav-cta"><a class="btn btn-primary" href="/contact">Free Estimate</a></li>
   </ul>
   <a class="nav-tel" href="tel:+13146346630"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2 A17.5 17.5 0 0 1 4.5 5.7 2 2 0 0 1 6.5 3.5Z"/></svg>(314) 634-6630</a>
 </div>
 </header>
 <nav class="actionbar" aria-label="Quick contact">
   <a class="ab-call" href="tel:+13146346630"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2 A17.5 17.5 0 0 1 4.5 5.7 2 2 0 0 1 6.5 3.5Z"/></svg>Call</a>
-  <a class="ab-quote" href="contact.html"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5h16v12H8l-4 3.5z"/><path d="M8 9h8M8 12.5h5"/></svg>Free Quote</a>
+  <a class="ab-quote" href="/contact"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5h16v12H8l-4 3.5z"/><path d="M8 9h8M8 12.5h5"/></svg>Free Quote</a>
 </nav>
 <main id="main">
 
 
 <section class="hero">
-  <canvas class="hero-canvas" id="hero3d" aria-hidden="true"></canvas>
+  <img class="hero-photo" src="assets/img/hero-jobsite.webp"
+       alt="M&amp;W GroundWorks skid steer clearing overgrown ground in Jefferson County"
+       width="1920" height="1080" fetchpriority="high" decoding="async">
   <div class="hero-in">
     <div class="wrap-wide">
       <p class="eyebrow">Jefferson County, Missouri</p>
@@ -58,20 +60,13 @@
         one crew for the whole property, from the first cut to the standing schedule.
       </p>
       <div class="btn-row">
-        <a class="btn btn-primary" href="contact.html">Get a free estimate</a>
+        <a class="btn btn-primary" href="/contact">Get a free estimate</a>
         <a class="btn btn-ghost" href="tel:+13146346630"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2 A17.5 17.5 0 0 1 4.5 5.7 2 2 0 0 1 6.5 3.5Z"/></svg>(314) 634-6630</a>
       </div>
       <p class="hero-note"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5.2l3.2 2"/></svg> Call or text — we get back to you the same day.</p>
     </div>
   </div>
   <button type="button" class="hero-scroll" id="hero-scroll" aria-label="Scroll to what we do">Scroll</button>
-  <div class="preset-switch" id="preset-switch" role="group" aria-label="Preview the hero at another time of day">
-    <span>Time of day</span>
-    <button type="button" id="tod-live" aria-pressed="true">Live</button>
-    <input type="range" id="tod-hour" min="0" max="23.5" step="0.5" value="12"
-           aria-label="Preview hour">
-    <span class="tval" id="tod-label" role="status" aria-live="polite">Live</span>
-  </div>
 </section>
 
 <div class="trust"><div class="wrap-wide"><ul><li><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Jefferson County based</li><li><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.5 5 5 10-11"/></svg>Free estimates</li><li><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5.2l3.2 2"/></svg>Same-day callback</li><li><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6h11v10h-11z"/><path d="M13.5 9.5H18l3 3.5v3h-7.5z"/><circle cx="6.5" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg>Debris hauled off</li></ul></div></div>
@@ -85,7 +80,7 @@
         <p class="lede">Most properties need all three eventually. Most contractors
           only do one. That gap is where jobs stall, and it's why we run the whole line.</p>
       </div>
-      <a class="btn btn-ghost" href="services.html">All services</a>
+      <a class="btn btn-ghost" href="/services">All services</a>
     </div>
     <div class="cbm"><div data-rv="0">
       <span class="n">01</span><h3>Clear</h3><p>Take it back to workable ground. Overgrowth, scrub, silted-in drainage and everything in the way of what comes next.</p>
@@ -105,39 +100,39 @@
     <div class="shead">
       <div><p class="eyebrow">What we do</p><h2>Nine services, one number</h2></div>
     </div>
-    <div class="svc-grid"><a class="svc" href="services.html#land-clearing" data-rv="0">
+    <div class="svc-grid"><a class="svc" href="/services#land-clearing" data-rv="0">
   <span class="svc-ico"><svg viewBox="0 0 24 24" width="46" height="46" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 6.5 11h3L5 18h14l-4.5-7h3L12 3Z"/><path d="M12 18v3"/><path d="M3.5 21h17"/></svg></span>
   <h3>Land Clearing</h3><p>Lots, acreage and building pads cleared and left ready to work.</p>
   <span class="more">See details <span><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></span></span>
-</a><a class="svc" href="services.html#brush-clearing" data-rv="1">
+</a><a class="svc" href="/services#brush-clearing" data-rv="1">
   <span class="svc-ico"><svg viewBox="0 0 24 24" width="46" height="46" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20c3-1 4.5-3.5 5-6"/><path d="M9 20c1.5-2 2-4.5 2-7"/><path d="M14 20c0-3.5.8-6.5 2.5-9"/><path d="M19 20c-.4-2.6.2-5 1.6-7"/><path d="M2.5 20h19"/><path d="M6 8 4 5m2 3 2.5-2"/></svg></span>
   <h3>Brush Clearing</h3><p>Overgrowth, thickets and scrub cut back and hauled out.</p>
   <span class="more">See details <span><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></span></span>
-</a><a class="svc" href="services.html#ditch-clearing" data-rv="2">
+</a><a class="svc" href="/services#ditch-clearing" data-rv="2">
   <span class="svc-ico"><svg viewBox="0 0 24 24" width="46" height="46" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8c3-2 6-2 9 0s6 2 9 0"/><path d="M3 14c3-2 6-2 9 0s6 2 9 0"/><path d="M3 20c3-2 6-2 9 0s6 2 9 0"/></svg></span>
   <h3>Ditch Clearing</h3><p>Drainage reopened so water leaves your property, not sits on it.</p>
   <span class="more">See details <span><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></span></span>
-</a><a class="svc" href="services.html#retaining-walls" data-rv="3">
+</a><a class="svc" href="/services#retaining-walls" data-rv="3">
   <span class="svc-ico"><svg viewBox="0 0 24 24" width="46" height="46" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="4" rx=".5"/><rect x="3" y="10" width="8" height="4" rx=".5"/><rect x="13" y="10" width="8" height="4" rx=".5"/><rect x="3" y="15" width="18" height="4" rx=".5"/></svg></span>
   <h3>Retaining Walls</h3><p>Block and stone walls that hold grade and drain properly.</p>
   <span class="more">See details <span><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></span></span>
-</a><a class="svc" href="services.html#masonry" data-rv="4">
+</a><a class="svc" href="/services#masonry" data-rv="4">
   <span class="svc-ico"><svg viewBox="0 0 24 24" width="46" height="46" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="16" rx="1"/><path d="M2.5 9.3h19M2.5 14.7h19M12 4v5.3M7 9.3v5.4M17 9.3v5.4M12 14.7V20"/></svg></span>
   <h3>Brick & Masonry Work</h3><p>Brick, block and stone — new work and repairs.</p>
   <span class="more">See details <span><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></span></span>
-</a><a class="svc" href="services.html#decks" data-rv="5">
+</a><a class="svc" href="/services#decks" data-rv="5">
   <span class="svc-ico"><svg viewBox="0 0 24 24" width="46" height="46" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20V9l9-5 9 5v11"/><path d="M3 12h18"/><path d="M8 20v-8M16 20v-8"/><path d="M12 20v-8"/></svg></span>
   <h3>Decks & Outdoor Construction</h3><p>Decks, steps, landings and the structures around them.</p>
   <span class="more">See details <span><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></span></span>
-</a><a class="svc" href="services.html#lawn-care" data-rv="6">
+</a><a class="svc" href="/services#lawn-care" data-rv="6">
   <span class="svc-ico"><svg viewBox="0 0 24 24" width="46" height="46" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/><path d="M3.5 15v-3h9v3"/><path d="M12.5 12 20 6"/><path d="M17 5h4v3"/><path d="M8.5 15h9"/></svg></span>
   <h3>Lawn Care & Yard Management</h3><p>Mowing, trimming and edging on a schedule you can forget about.</p>
   <span class="more">See details <span><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></span></span>
-</a><a class="svc" href="services.html#junk-removal" data-rv="7">
+</a><a class="svc" href="/services#junk-removal" data-rv="7">
   <span class="svc-ico"><svg viewBox="0 0 24 24" width="46" height="46" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6h11v10h-11z"/><path d="M13.5 9.5H18l3 3.5v3h-7.5z"/><circle cx="6.5" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg></span>
   <h3>Junk Removal</h3><p>Hauled off in one trip — yard, garage, outbuilding or lot.</p>
   <span class="more">See details <span><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></span></span>
-</a><a class="svc" href="services.html#property-maintenance" data-rv="8">
+</a><a class="svc" href="/services#property-maintenance" data-rv="8">
   <span class="svc-ico"><svg viewBox="0 0 24 24" width="46" height="46" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v6c0 4.4 3.1 7.9 7.5 9 4.4-1.1 7.5-4.6 7.5-9V6L12 3Z"/><path d="m9 12 2.2 2.2L15.5 10"/></svg></span>
   <h3>General Property Maintenance</h3><p>One number for keeping the whole property in shape.</p>
   <span class="more">See details <span><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="m13 6 6 6-6 6"/></svg></span></span>
@@ -155,8 +150,8 @@
     <div class="grid-2">
       <figure style="margin:0" data-rv="0">
   <div class="ba" style="--pos:52%">
-    <div class="lyr bef"><img src="assets/img/gallery/before-clearing.jpg" alt="Overgrown lot before clearing" style="width:100%;height:100%;display:block;object-fit:cover"></div>
-    <div class="lyr aft"><img src="assets/img/gallery/after-clearing.jpg" alt="Cleared lot after grading" style="width:100%;height:100%;display:block;object-fit:cover"></div>
+    <div class="lyr bef"><img loading="lazy" decoding="async" width="1024" height="1024" src="assets/img/gallery/before-clearing.webp" alt="Overgrown lot before clearing" style="width:100%;height:100%;display:block;object-fit:cover"></div>
+    <div class="lyr aft"><img loading="lazy" decoding="async" width="1024" height="1024" src="assets/img/gallery/after-clearing.webp" alt="Cleared lot after grading" style="width:100%;height:100%;display:block;object-fit:cover"></div>
     <span class="ba-tag l">Before</span>
     <span class="ba-tag r">After</span>
     <input type="range" min="0" max="100" value="52"
@@ -167,8 +162,8 @@
 </figure>
       <figure style="margin:0" data-rv="1">
   <div class="ba" style="--pos:52%">
-    <div class="lyr bef"><img src="assets/img/gallery/fence-before.jpg" alt="Fence line before clearing" style="width:100%;height:100%;display:block;object-fit:cover"></div>
-    <div class="lyr aft"><img src="assets/img/gallery/fence-after.jpg" alt="Fence line after reclamation" style="width:100%;height:100%;display:block;object-fit:cover"></div>
+    <div class="lyr bef"><img loading="lazy" decoding="async" width="1024" height="1024" src="assets/img/gallery/fence-before.webp" alt="Fence line before clearing" style="width:100%;height:100%;display:block;object-fit:cover"></div>
+    <div class="lyr aft"><img loading="lazy" decoding="async" width="1024" height="1024" src="assets/img/gallery/fence-after.webp" alt="Fence line after reclamation" style="width:100%;height:100%;display:block;object-fit:cover"></div>
     <span class="ba-tag l">Before</span>
     <span class="ba-tag r">After</span>
     <input type="range" min="0" max="100" value="52"
@@ -198,7 +193,7 @@
         <p class="lede">Missouri ground dictates the schedule. Clearing in frozen
           January soil beats clearing in April mud every time — and we'll tell you
           when waiting saves you money.</p></div>
-      <a class="btn btn-ghost" href="service-area.html">Service area &amp; seasons</a>
+      <a class="btn btn-ghost" href="/service-area">Service area &amp; seasons</a>
     </div>
     <div class="cal"><div class="cal-row head"><div class="cal-lbl">Service</div><div class="cal-months"><span>J</span><span>F</span><span>M</span><span>A</span><span>M</span><span>J</span><span>J</span><span>A</span><span>S</span><span>O</span><span>N</span><span>D</span></div></div><div class="cal-row"><div class="cal-lbl">Mowing & yard management</div><div class="cal-months"><i class=""></i><i class=""></i><i class=""></i><i class="peak"></i><i class="peak"></i><i class="peak"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i></div></div><div class="cal-row"><div class="cal-lbl">Land & brush clearing</div><div class="cal-months"><i class="peak"></i><i class="peak"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class="on"></i><i class="peak"></i><i class="peak"></i></div></div><div class="cal-row"><div class="cal-lbl">Walls, masonry & decks</div><div class="cal-months"><i class=""></i><i class=""></i><i class="on"></i><i class="peak"></i><i class="peak"></i><i class="peak"></i><i class="peak"></i><i class="peak"></i><i class="peak"></i><i class="peak"></i><i class="on"></i><i class=""></i></div></div><div class="cal-row"><div class="cal-lbl">Ditch clearing & drainage</div><div class="cal-months"><i class=""></i><i class=""></i><i class="on"></i><i class="peak"></i><i class="peak"></i><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i><i class="peak"></i><i class="on"></i><i class=""></i></div></div><div class="cal-row"><div class="cal-lbl">Leaf & seasonal clean-up</div><div class="cal-months"><i class=""></i><i class=""></i><i class="on"></i><i class="peak"></i><i class="on"></i><i class=""></i><i class=""></i><i class=""></i><i class="on"></i><i class="peak"></i><i class="peak"></i><i class=""></i></div></div><div class="cal-row"><div class="cal-lbl">Junk removal</div><div class="cal-months"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div></div><div class="cal-key"><span><b style="background:var(--moss-400)"></b>Peak season</span><span><b style="background:var(--moss-700)"></b>In season</span><span><b style="background:rgba(242,237,225,.12)"></b>Off season</span></div>
   </div>
@@ -210,7 +205,7 @@
       <div><p class="eyebrow">Where we work</p><h2>Jefferson County, Missouri</h2>
         <p class="lede">From the Arnold subdivisions to the back forty in Grubville.
           Highlighted towns are our core area.</p></div>
-      <a class="btn btn-ghost" href="service-area.html">Full list</a>
+      <a class="btn btn-ghost" href="/service-area">Full list</a>
     </div>
     <div class="towns"><span class="town key">Arnold</span><span class="town key">Festus</span><span class="town key">Hillsboro</span><span class="town key">Imperial</span><span class="town key">High Ridge</span><span class="town key">House Springs</span><span class="town key">Barnhart</span><span class="town key">De Soto</span><span class="town key">Cedar Hill</span><span class="town key">Pevely</span><span class="town key">Herculaneum</span><span class="town key">Byrnes Mill</span><span class="town">Crystal City</span><span class="town">Kimmswick</span><span class="town">Antonia</span><span class="town">Dittmer</span><span class="town">Hematite</span><span class="town">Mapaville</span><span class="town">Morse Mill</span><span class="town">Otto</span><span class="town">Seckman</span><span class="town">Weber Hill</span></div>
   </div>
@@ -224,7 +219,7 @@
         Free estimate, same-day callback, and a written scope before anything starts.
       </p>
       <div class="btn-row mt-3" style="justify-content:center">
-        <a class="btn btn-primary" href="contact.html">Get a free estimate</a>
+        <a class="btn btn-primary" href="/contact">Get a free estimate</a>
         <a class="btn btn-ghost" href="sms:+13146346630"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5h16v12H8l-4 3.5z"/><path d="M8 9h8M8 12.5h5"/></svg>Text us a photo</a>
       </div>
     </div>
@@ -241,48 +236,6 @@
   </div>
 </section>
 
-<script type="module">
-  import { mountHeroGrass } from './assets/js/hero-grass.js';
-  const c = document.getElementById('hero3d');
-  const api = c ? mountHeroGrass(c, { preset: 'dusk' }) : null;
-  window.__heroApi = api;
-  // Day-cycle scrubber — preview only. Delete this block and the
-  // .preset-switch markup once you're happy with it.
-  const slider = document.getElementById('tod-hour');
-  const liveBtn = document.getElementById('tod-live');
-  const label = document.getElementById('tod-label');
-  const fmt = (h) => {
-    const hh = Math.floor(h), mm = Math.round((h - hh) * 60);
-    const ap = hh < 12 ? 'am' : 'pm';
-    const h12 = hh % 12 === 0 ? 12 : hh % 12;
-    return h12 + ':' + String(mm).padStart(2, '0') + ap;
-  };
-  if (api && slider) {
-    const goLive = () => {
-      api.goLive();
-      liveBtn.setAttribute('aria-pressed', 'true');
-      const sh = api.siteHour();
-      slider.value = String(Math.round(sh * 2) / 2);
-      label.textContent = fmt(sh) + ' · ' + api.describeLook();
-    };
-    slider.addEventListener('input', () => {
-      const h = parseFloat(slider.value);
-      api.previewHour(h);
-      liveBtn.setAttribute('aria-pressed', 'false');
-      label.textContent = fmt(h) + ' · ' + api.describeLook();
-    });
-    liveBtn.addEventListener('click', goLive);
-    goLive();
-  }
-  // Scroll cue actually scrolls.
-  const sc = document.getElementById('hero-scroll');
-  if (sc) sc.addEventListener('click', () => {
-    const next = document.querySelector('.hero') &&
-      document.querySelector('.hero').nextElementSibling;
-    const target = next && next.nextElementSibling ? next.nextElementSibling : next;
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-</script>
 </main>
 <footer class="foot">
 <div class="wrap-wide">
@@ -296,16 +249,16 @@
       <a class="foot-tel" href="tel:+13146346630">(314) 634-6630</a>
       <p style="color:var(--bone-mute);font-size:.9rem;margin-top:.4rem">Mon–Sat, 7:00am – 6:00pm</p>
       <div class="btn-row mt-3">
-        <a class="btn btn-primary" href="contact.html">Get a Free Estimate</a>
+        <a class="btn btn-primary" href="/contact">Get a Free Estimate</a>
       </div>
     </div>
-    <div><h3>Services</h3><ul><li><a href="services.html#land-clearing">Land Clearing</a></li><li><a href="services.html#brush-clearing">Brush Clearing</a></li><li><a href="services.html#ditch-clearing">Ditch Clearing</a></li><li><a href="services.html#retaining-walls">Retaining Walls</a></li><li><a href="services.html#masonry">Brick & Masonry Work</a></li><li><a href="services.html#decks">Decks & Outdoor Construction</a></li><li><a href="services.html">All services</a></li></ul></div>
-    <div><h3>Service Area</h3><ul><li><a href="service-area.html">Arnold, MO</a></li><li><a href="service-area.html">Festus, MO</a></li><li><a href="service-area.html">Hillsboro, MO</a></li><li><a href="service-area.html">Imperial, MO</a></li><li><a href="service-area.html">High Ridge, MO</a></li><li><a href="service-area.html">House Springs, MO</a></li><li><a href="service-area.html">Full area</a></li></ul></div>
+    <div><h3>Services</h3><ul><li><a href="/services#land-clearing">Land Clearing</a></li><li><a href="/services#brush-clearing">Brush Clearing</a></li><li><a href="/services#ditch-clearing">Ditch Clearing</a></li><li><a href="/services#retaining-walls">Retaining Walls</a></li><li><a href="/services#masonry">Brick & Masonry Work</a></li><li><a href="/services#decks">Decks & Outdoor Construction</a></li><li><a href="/services">All services</a></li></ul></div>
+    <div><h3>Service Area</h3><ul><li><a href="/service-area">Arnold, MO</a></li><li><a href="/service-area">Festus, MO</a></li><li><a href="/service-area">Hillsboro, MO</a></li><li><a href="/service-area">Imperial, MO</a></li><li><a href="/service-area">High Ridge, MO</a></li><li><a href="/service-area">House Springs, MO</a></li><li><a href="/service-area">Full area</a></li></ul></div>
     <div><h3>Company</h3><ul>
-      <li><a href="about.html">About</a></li>
-      <li><a href="work.html">Our Work</a></li>
-      <li><a href="service-area.html">Seasonal Calendar</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/work">Our Work</a></li>
+      <li><a href="/service-area">Seasonal Calendar</a></li>
+      <li><a href="/contact">Contact</a></li>
       <li><a href="sms:+13146346630">Text us</a></li>
     </ul></div>
   </div>
