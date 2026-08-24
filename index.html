@@ -65,6 +65,13 @@
     </div>
   </div>
   <button type="button" class="hero-scroll" id="hero-scroll" aria-label="Scroll to what we do">Scroll</button>
+  <div class="preset-switch" id="preset-switch" role="group" aria-label="Preview the hero at another time of day">
+    <span>Time of day</span>
+    <button type="button" id="tod-live" aria-pressed="true">Live</button>
+    <input type="range" id="tod-hour" min="0" max="23.5" step="0.5" value="12"
+           aria-label="Preview hour">
+    <span class="tval" id="tod-label" role="status" aria-live="polite">Live</span>
+  </div>
 </section>
 
 <div class="trust"><div class="wrap-wide"><ul><li><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>Jefferson County based</li><li><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.5 5 5 10-11"/></svg>Free estimates</li><li><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5.2l3.2 2"/></svg>Same-day callback</li><li><svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6h11v10h-11z"/><path d="M13.5 9.5H18l3 3.5v3h-7.5z"/><circle cx="6.5" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg>Debris hauled off</li></ul></div></div>
@@ -269,14 +276,36 @@
 <script type="module">
   import { mountHeroGrass } from './assets/js/hero-grass.js';
   const c = document.getElementById('hero3d');
-  // Field is built from the dusk preset, as it always was; the visible look
-  // then comes from the day-cycle model, which is far richer than any flat
-  // preset. Pinned to mid-afternoon rather than the real clock, so the
-  // scene never renders night to a daytime visitor. previewHour also stops
-  // the internal clock, so nothing repaints on a timer.
   const api = c ? mountHeroGrass(c, { preset: 'dusk' }) : null;
-  if (api) api.previewHour(14);
   window.__heroApi = api;
+  // Day-cycle scrubber — preview only. Delete this block and the
+  // .preset-switch markup once you're happy with it.
+  const slider = document.getElementById('tod-hour');
+  const liveBtn = document.getElementById('tod-live');
+  const label = document.getElementById('tod-label');
+  const fmt = (h) => {
+    const hh = Math.floor(h), mm = Math.round((h - hh) * 60);
+    const ap = hh < 12 ? 'am' : 'pm';
+    const h12 = hh % 12 === 0 ? 12 : hh % 12;
+    return h12 + ':' + String(mm).padStart(2, '0') + ap;
+  };
+  if (api && slider) {
+    const goLive = () => {
+      api.goLive();
+      liveBtn.setAttribute('aria-pressed', 'true');
+      const sh = api.siteHour();
+      slider.value = String(Math.round(sh * 2) / 2);
+      label.textContent = fmt(sh) + ' · ' + api.describeLook();
+    };
+    slider.addEventListener('input', () => {
+      const h = parseFloat(slider.value);
+      api.previewHour(h);
+      liveBtn.setAttribute('aria-pressed', 'false');
+      label.textContent = fmt(h) + ' · ' + api.describeLook();
+    });
+    liveBtn.addEventListener('click', goLive);
+    goLive();
+  }
   // Scroll cue actually scrolls.
   const sc = document.getElementById('hero-scroll');
   if (sc) sc.addEventListener('click', () => {
