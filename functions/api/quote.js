@@ -9,6 +9,11 @@
  *      the verified true-site.tech domain -- Base44's mailer refuses to write
  *      to addresses that are not registered users of the app, which is why
  *      earlier notifications silently landed in the wrong inbox.
+ *
+ *      The shop is the ONLY recipient. This is not our business and its leads
+ *      are not our mail; nobody at TrueSite is copied. Resend needs a verified
+ *      domain to send FROM, never to authorise a recipient, so no DNS on
+ *      mnwgroundworks.com is required for this to deliver.
  *   2. Persist the lead, so nothing depends on an inbox not being deleted.
  *
  * If either one succeeds the visitor gets a success state. Only if BOTH fail do
@@ -17,7 +22,6 @@
  */
 
 const SHOP = 'mnwgroundworks@gmail.com';
-const OVERSIGHT = 'majorbrinson9@gmail.com';
 const FROM = 'M&W GroundWorks Website <leads@true-site.tech>';
 const STORE =
   'https://base44.app/api/apps/6a0a7846a08a2bd55b05e1fe/functions/mwGroundworksQuote';
@@ -125,7 +129,6 @@ ${
       text,
       html,
     };
-    if (!override) payload.cc = [OVERSIGHT];
     if (email) payload.reply_to = email;
 
     try {
