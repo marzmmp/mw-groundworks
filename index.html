@@ -276,7 +276,7 @@
 <script type="module">
   import { mountHeroGrass } from './assets/js/hero-grass.js';
   const c = document.getElementById('hero3d');
-  const api = c ? mountHeroGrass(c, { preset: 'reference' }) : null;
+  const api = c ? mountHeroGrass(c, { preset: 'reference', dayCycle: true }) : null;
   window.__heroApi = api;
   // Day-cycle scrubber — preview only. Delete this block and the
   // .preset-switch markup once you're happy with it.
@@ -304,9 +304,10 @@
       label.textContent = fmt(h) + ' · ' + api.describeLook();
     });
     liveBtn.addEventListener('click', goLive);
-    // Deliberately NOT calling goLive() here: it repaints a day-cycle look
-    // straight over the reference tint. The slider still works if moved.
-    label.textContent = 'Reference look';
+    // Start on the real Missouri clock. Safe now that every stop holds the
+    // reference grass tint, so this lights the approved field rather than
+    // replacing it.
+    goLive();
   }
   // Scroll cue actually scrolls.
   const sc = document.getElementById('hero-scroll');

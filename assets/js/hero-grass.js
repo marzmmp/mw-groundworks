@@ -16,6 +16,9 @@ export function mountHeroGrass(canvas, opts = {}) {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const {
     preset = 'auto',
+    // Explicitly opt the live day cycle in or out. Left undefined it falls
+    // back to the old behaviour of only running for preset 'auto'.
+    dayCycle = undefined,
     quality = 'auto',
     markScale = 0.070,
     centred = false,
@@ -56,11 +59,19 @@ export function mountHeroGrass(canvas, opts = {}) {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(45, w0 / h0, 0.1, 2000);
 
-  const live = preset === 'auto';
+  // The day cycle drives the scene whenever dayCycle is on. This used to be
+  // `preset === 'auto'` only, which meant a named preset silently disabled the
+  // clock: startClock() bailed, and even pressing Live painted one frame and
+  // then froze. Passing an explicit dayCycle keeps a named preset as the BASE
+  // look while still letting the clock light it.
+  const live = dayCycle === undefined ? preset === 'auto' : !!dayCycle;
   let look = live ? lookForTime() : null;
 
   const field = createGrassField(scene, {
-    preset: live ? 'dusk' : preset,
+    // The requested preset is the BASE look the cycle paints on top of.
+    // Hardcoding 'dusk' here threw away the reference preset's FogExp2 density
+    // and ground colour the moment the cycle was live.
+    preset: preset === 'auto' ? 'reference' : preset,
     instances,
     width: 85,
     windSpeed: 1.0,
@@ -331,7 +342,12 @@ export function mountHeroGrass(canvas, opts = {}) {
 
   const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0.01 });
   io.observe(canvas);
-  document.addEventListener('visibilitychange', () => { visible = !document.hidden; });
+  document.addEventListener('visibilitychange', () => {
+    visible = !document.hidden;
+    // A backgrounded tab throttles timers hard, so someone returning after
+    // hours would be looking at a stale sky. Repaint on the way back in.
+    if (visible && clockTimer) paint(lookForTime());
+  });
 
   if (reduce) {
     update(6.0);

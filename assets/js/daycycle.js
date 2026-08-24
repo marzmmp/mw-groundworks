@@ -69,53 +69,62 @@ export function sunPosition(date, latDeg, lonDeg) {
 // states. `scrim` is how hard the hero overlay has to work to keep the
 // headline legible against that sky.
 const STOPS = [
+  // tipColor and bottomColor are the reference grass and never change. Time of
+  // day is carried by `grade` (a final multiplier on the blade colour), the sky,
+  // the clouds and the three lights -- which is how real light works, and which
+  // keeps the field the same field from midnight to noon. The midday stop is
+  // exactly the `reference` preset, so at noon the cycle resolves to the spec.
+  // Exposures are the reference 0.58 at midday, lifted toward night in the same
+  // proportion the originals used.
+
   { el: -18, name: 'night', scrim: 0.36,
-    tipColor: '#2E4318', bottomColor: '#050A04', grade: '#4A5840',
+    tipColor: '#00994d', bottomColor: '#001a0d', grade: '#2F3D57',
     skyTop: '#03060A', skyHorizon: '#0A1119',
-    cloudColor: '#141C24', cloudCover: 0.20, cloudSpeed: 0.5,
+    cloudColor: '#141C24', cloudCover: 0.2, cloudSpeed: 0.5,
     sunColor: '#2A3550', hemiSky: '#131C28', hemiGround: '#070C06',
     hemiIntensity: 0.32, dirColor: '#5A6D8C', dirIntensity: 0.45,
-    keyColor: 0xaebbd6, keyIntensity: 0.55, fillIntensity: 0.55, exposure: 1.20 },
+    keyColor: 0xaebbd6, keyIntensity: 0.55, fillIntensity: 0.55, exposure: 0.71 },
 
-  { el: -6, name: 'twilight', scrim: 0.40,
-    tipColor: '#3E5720', bottomColor: '#070E06', grade: '#5E6D4A',
+  { el: -6, name: 'twilight', scrim: 0.4,
+    tipColor: '#00994d', bottomColor: '#001a0d', grade: '#47536F',
     skyTop: '#050A0C', skyHorizon: '#1E2233',
     cloudColor: '#22283A', cloudCover: 0.24, cloudSpeed: 0.55,
     sunColor: '#6B5F6E', hemiSky: '#1E2432', hemiGround: '#0A1008',
     hemiIntensity: 0.4, dirColor: '#8A87A0', dirIntensity: 0.7,
-    keyColor: 0xc2c0d4, keyIntensity: 0.8, fillIntensity: 0.9, exposure: 1.14 },
+    keyColor: 0xc2c0d4, keyIntensity: 0.8, fillIntensity: 0.9, exposure: 0.675 },
 
   { el: 0, name: 'dusk', scrim: 0.44,
-    tipColor: '#4E6B26', bottomColor: '#080F06', grade: '#6E7D55',
+    tipColor: '#00994d', bottomColor: '#001a0d', grade: '#8A6E52',
     skyTop: '#060907', skyHorizon: '#3A2A1C',
     cloudColor: '#3A2E20', cloudCover: 0.26, cloudSpeed: 0.6,
     sunColor: '#8A6238', hemiSky: '#2A2A1C', hemiGround: '#0C120A',
     hemiIntensity: 0.45, dirColor: '#B08C5E', dirIntensity: 0.9,
-    keyColor: 0xffe0b4, keyIntensity: 1.1, fillIntensity: 1.5, exposure: 1.08 },
+    keyColor: 0xffe0b4, keyIntensity: 1.1, fillIntensity: 1.5, exposure: 0.639 },
 
   { el: 8, name: 'goldenHour', scrim: 0.44,
-    tipColor: '#6F8C39', bottomColor: '#111B0C', grade: '#B99A62',
+    tipColor: '#00994d', bottomColor: '#001a0d', grade: '#D6A76B',
     skyTop: '#070B08', skyHorizon: '#4E3A24',
-    cloudColor: '#6B563C', cloudCover: 0.30, cloudSpeed: 0.8,
+    cloudColor: '#6B563C', cloudCover: 0.3, cloudSpeed: 0.8,
     sunColor: '#C08A4A', hemiSky: '#4A3E28', hemiGround: '#1A2412',
     hemiIntensity: 0.55, dirColor: '#E8C48E', dirIntensity: 1.25,
-    keyColor: 0xfff1d4, keyIntensity: 1.35, fillIntensity: 1.75, exposure: 1.05 },
+    keyColor: 0xfff1d4, keyIntensity: 1.35, fillIntensity: 1.75, exposure: 0.621 },
 
   { el: 22, name: 'morning', scrim: 0.46,
-    tipColor: '#78A03A', bottomColor: '#152613', grade: '#D2DCC0',
+    tipColor: '#00994d', bottomColor: '#001a0d', grade: '#F0EEE0',
     skyTop: '#4E7CB8', skyHorizon: '#9FC2E0',
     cloudColor: '#F2F0E8', cloudCover: 0.42, cloudSpeed: 0.9,
     sunColor: '#FFEBC8', hemiSky: '#9CBAE4', hemiGround: '#2E4A26',
     hemiIntensity: 0.8, dirColor: '#FFF2DE', dirIntensity: 1.45,
-    keyColor: 0xfff6e6, keyIntensity: 1.2, fillIntensity: 1.5, exposure: 1.0 },
+    keyColor: 0xfff6e6, keyIntensity: 1.2, fillIntensity: 1.5, exposure: 0.592 },
 
   { el: 55, name: 'daylight', scrim: 0.52,
-    tipColor: '#7FA83C', bottomColor: '#16290F', grade: '#E4EAD6',
-    skyTop: '#6FA0DC', skyHorizon: '#BBD9F2',
+    tipColor: '#00994d', bottomColor: '#001a0d', grade: '#FFFFFF',
+    skyTop: '#b3d1ff', skyHorizon: '#b3daff',
     cloudColor: '#FFFFFF', cloudCover: 0.5, cloudSpeed: 1.0,
-    sunColor: '#FFF4D6', hemiSky: '#BCD4FF', hemiGround: '#33502A',
-    hemiIntensity: 0.9, dirColor: '#FFF6E0', dirIntensity: 1.6,
-    keyColor: 0xfffaf0, keyIntensity: 1.15, fillIntensity: 1.4, exposure: 0.98 },
+    sunColor: '#fff4d6', hemiSky: '#bcd4ff', hemiGround: '#33502a',
+    hemiIntensity: 0.9, dirColor: '#fff6e0', dirIntensity: 1.6,
+    keyColor: 0xfffaf0, keyIntensity: 1.15, fillIntensity: 1.4, exposure: 0.58 },
+
 ];
 
 const NUMERIC = ['scrim', 'cloudCover', 'cloudSpeed', 'hemiIntensity',
