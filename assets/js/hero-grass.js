@@ -283,8 +283,10 @@ export function mountHeroGrass(canvas, opts = {}) {
       }
     }
     mark.position.y = restore;
-    // NDC spans -1..1, so half of the delta is the fraction of the viewport
-    return { w: (maxX - minX) / 2, h: (maxY - minY) / 2 };
+    // NDC spans -1..1, so half of the delta is the fraction of the viewport.
+    // The raw bounds come back too: fitting the size is useless if nothing
+    // checks where that size actually lands.
+    return { w: (maxX - minX) / 2, h: (maxY - minY) / 2, minX, maxX, minY, maxY };
   }
 
   function fitMark(maxW, maxH) {
@@ -298,6 +300,55 @@ export function mountHeroGrass(canvas, opts = {}) {
     }
   }
 
+  /* Keep the whole mark on the canvas.
+
+     fitMark() only ever constrained the mark's SIZE. Nothing constrained where
+     the projection landed, and the desktop layout deliberately pushes the group
+     out to world x=+4.6 with the camera aimed left of centre -- so on a
+     1024-wide window the mark spanned about NDC 0.12 to 1.04 and the W was
+     sliced off by the right edge of the canvas.
+
+     This clamps the projected bounds into an explicit horizontal band. It
+     prefers shifting the group in world space (an NDC shortfall converted
+     through world-units-per-NDC, derived from the mark's own bounding box) and
+     only shrinks when the mark genuinely cannot fit the band. Driving it from
+     the real projection makes it correct at every viewport rather than at the
+     one width a hardcoded fraction was tuned for.
+
+     Each shift re-seats the mark, because the terrain height under its feet
+     changes as it slides sideways. */
+  function placeMark(left, right) {
+    const bb = mark.geometry.boundingBox;
+    if (!bb) return;
+    for (let pass = 0; pass < 4; pass++) {
+      const s = projectedSize();
+      const ndcW = s.maxX - s.minX;
+      if (!(ndcW > 0)) return;
+      const band = right - left;
+
+      // wider than the band it has to live in: shrink, then place
+      if (ndcW > band) {
+        const next = Math.max(0.008, group.scale.x * (band / ndcW));
+        if (Math.abs(next - group.scale.x) < 1e-5) return;
+        group.scale.setScalar(next);
+        group.position.y = seat(group.position.x, seatZ);
+        group.updateMatrixWorld(true);
+        continue;
+      }
+
+      const worldW = (bb.max.x - bb.min.x) * group.scale.x;
+      const perNdc = worldW / ndcW;            // world units per NDC unit
+      let dx = 0;
+      if (s.maxX > right) dx = (right - s.maxX) * perNdc;
+      else if (s.minX < left) dx = (left - s.minX) * perNdc;
+      if (Math.abs(dx) < 1e-4) return;         // already inside the band
+
+      group.position.x += dx;
+      group.position.y = seat(group.position.x, seatZ);
+      group.updateMatrixWorld(true);
+    }
+  }
+
   function resize() {
     const w = canvas.clientWidth, h = canvas.clientHeight;
     if (!w || !h) return;
@@ -305,13 +356,14 @@ export function mountHeroGrass(canvas, opts = {}) {
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
     const narrow = w < 900;
-    let fit;
+    let fit, band;
     if (centred) {
       camera.fov = 42;
       camera.position.set(0, 5.4, 24);
       camera.lookAt(0, 3.6, -4);
       group.position.set(0, seat(0, 0), 0);
       fit = [0.60, 0.52];
+      band = [-0.88, 0.88];
     } else if (narrow) {
       // Phone: the copy column is tall (headline + tagline + sub + two CTAs),
       // so the mark has to sit clearly below all of it rather than behind it.
@@ -320,6 +372,7 @@ export function mountHeroGrass(canvas, opts = {}) {
       camera.lookAt(0, 9.4, -4);
       group.position.set(0, seat(0, -1.0), -1.0);
       fit = [0.82, 0.17];
+      band = [-0.92, 0.92];
     } else {
       // desktop: mark right of centre, headline owns the dark left third
       camera.fov = 40;
@@ -327,9 +380,13 @@ export function mountHeroGrass(canvas, opts = {}) {
       camera.lookAt(-2.6, 3.4, -4);
       group.position.set(4.6, seat(4.6, 0), 0);
       fit = [0.46, 0.46];
+      // right of the headline's longest line, clear of the canvas edge
+      band = [0.12, 0.95];
     }
     camera.updateProjectionMatrix();
     fitMark(fit[0], fit[1]);
+    // Fit sizes it; place guarantees the whole thing is actually on screen.
+    if (band) placeMark(band[0], band[1]);
     // Re-seat at the fitted scale. Seating depends on the current scale, so
     // doing it before the fit leaves the mark floating on wide screens and
     // sunk into the field on narrow ones.
