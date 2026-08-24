@@ -92,6 +92,7 @@ grep -q 'data-endpoint="/api/quote"' dist/contact.html || { echo "FAIL: contact 
 [ -f dist/assets/vendor/three.module.js ] || { echo "FAIL: three.js missing from dist"; fail=1; }
 grep -q 'id="hero3d"' dist/index.html || { echo "FAIL: hero canvas missing from home page"; fail=1; }
 [ -f dist/functions/api/quote.js ] || { echo "FAIL: lead endpoint missing from dist"; fail=1; }
+[ -f dist/functions/_middleware.js ] || { echo "FAIL: www-to-apex middleware missing from dist"; fail=1; }
 [ -e dist/logos.html ] && { echo "FAIL: logos.html would be published"; fail=1; }
 [ -e dist/sting.html ] && { echo "FAIL: sting.html would be published"; fail=1; }
 [ -e dist/assets/video ] && { echo "FAIL: video would be published"; fail=1; }
