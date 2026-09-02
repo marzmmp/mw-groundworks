@@ -1,0 +1,189 @@
+{
+  "land-clearing": {
+    "photographer": "Ryan Latimer",
+    "photographer_url": "https://www.pexels.com/@ryan-latimer-706221573",
+    "pexels_url": "https://www.pexels.com/photo/bulldozer-in-autumn-forest-clearing-harbor-springs-33941336/",
+    "pexels_id": 33941336,
+    "alt": "A bulldozer parked in a forest clearing surrounded by autumn foliage in Harbor Springs, Michigan.",
+    "verified_as": "[fallback 2 hits] white and red skid steer loader in forest with tall grass ",
+    "tries": 1
+  },
+  "brush-clearing": {
+    "photographer": "https://kaboompics.com/",
+    "photographer_url": "https://www.pexels.com/@karola-g",
+    "pexels_url": "https://www.pexels.com/photo/person-using-chainsaw-4206120/",
+    "pexels_id": 4206120,
+    "alt": "Forestry worker using a chainsaw to cut tree logs in an outdoor setting.",
+    "score": 11,
+    "rejected_candidates": 2
+  },
+  "ditch-clearing": {
+    "photographer": "Sergei Starostin",
+    "photographer_url": "https://www.pexels.com/@sejio402",
+    "pexels_url": "https://www.pexels.com/photo/urban-pipework-construction-site-close-up-29274530/",
+    "pexels_id": 29274530,
+    "alt": "Close-up of urban pipe installation at a construction site, showing various pipes and materials.",
+    "verified_as": "pipes in trench",
+    "tries": 5
+  },
+  "retaining-walls": {
+    "photographer": "Loifotos",
+    "photographer_url": "https://www.pexels.com/@loifotos",
+    "pexels_url": "https://www.pexels.com/photo/charming-garden-courtyard-in-da-l-t-vietnam-32808802/",
+    "pexels_id": 32808802,
+    "alt": "Lush garden courtyard with stone wall and plants in \u0110\u00e0 L\u1ea1t, Vietnam.",
+    "verified_as": "stone retaining wall in garden",
+    "tries": 1
+  },
+  "masonry": {
+    "photographer": "GOWTHAM AGM",
+    "photographer_url": "https://www.pexels.com/@gowtham-agm-609630353",
+    "pexels_url": "https://www.pexels.com/photo/close-up-of-man-building-bricks-wall-19688828/",
+    "pexels_id": 19688828,
+    "alt": "Hands laying bricks with cement in a construction setting, showcasing precise masonry work.",
+    "score": 11,
+    "rejected_candidates": 0
+  },
+  "decks": {
+    "photographer": "C\u00d4NG TY CP THI C\u00d4NG M\u1ed8C PH\u00c1T",
+    "photographer_url": "https://www.pexels.com/@cong-ty-cp-thi-cong-m-c-phat-2533691",
+    "pexels_url": "https://www.pexels.com/photo/man-in-gray-shirt-and-cap-working-with-wooden-planks-4135920/",
+    "pexels_id": 4135920,
+    "alt": "A skilled carpenter working with wooden planks outdoors in H\u1ed3 Ch\u00ed Minh City.",
+    "verified_as": "wooden planks being laid for deck construction",
+    "tries": 3
+  },
+  "lawn-care": {
+    "photographer": "Pascal K\u00fcffer",
+    "photographer_url": "https://www.pexels.com/@pascal-kuffer-190126462",
+    "pexels_url": "https://www.pexels.com/photo/person-using-lawn-mower-11364122/",
+    "pexels_id": 11364122,
+    "alt": "A person using a lawn mower to trim grass in a sunny garden.",
+    "score": 11,
+    "rejected_candidates": 2
+  },
+  "junk-removal": {
+    "photographer": "Jan van der Wolf",
+    "photographer_url": "https://www.pexels.com/@jan-van-der-wolf-11680885",
+    "pexels_url": "https://www.pexels.com/photo/rubble-along-fence-23940504/",
+    "pexels_id": 23940504,
+    "alt": "A large pile of rubble consisting of bricks and debris against a corrugated metal fence.",
+    "verified_as": "[fallback 2 hits] pile of bricks and debris against blue corrugated metal wa",
+    "tries": 1
+  },
+  "property-maintenance": {
+    "photographer": "Rodolfo Gaion",
+    "photographer_url": "https://www.pexels.com/@gaion",
+    "pexels_url": "https://www.pexels.com/photo/people-cutting-grass-along-an-asphalt-road-15211878/",
+    "pexels_id": 15211878,
+    "alt": "Maintenance workers trimming grass along a road in Londrina, Brazil on a clear day.",
+    "score": 9,
+    "rejected_candidates": 1
+  },
+  "skid-steer": {
+    "photographer": "Ag  photography",
+    "photographer_url": "https://www.pexels.com/@ag-photography-243127230",
+    "pexels_url": "https://www.pexels.com/photo/yellow-and-black-heavy-equipment-on-brown-sand-12455093/",
+    "pexels_id": 12455093,
+    "alt": "A bulldozer moves soil at a busy construction site, surrounded by piles of gravel and concrete structures.",
+    "verified_as": "JCB backhoe loader working dirt",
+    "tries": 3
+  },
+  "mini-excavator": {
+    "photographer": "Jean-Paul Wettstein",
+    "photographer_url": "https://www.pexels.com/@jean-paul-wettstein-677916508",
+    "pexels_url": "https://www.pexels.com/photo/red-mini-excavator-on-grassy-hill-37093541/",
+    "pexels_id": 37093541,
+    "alt": "Red mini excavator standing on grass against a hillside in a bright sunny day.",
+    "score": 5,
+    "rejected_candidates": 1
+  },
+  "dump-trailer": {
+    "photographer": "SHOX ART",
+    "photographer_url": "https://www.pexels.com/@shox",
+    "pexels_url": "https://www.pexels.com/photo/dump-truck-unloading-gravel-at-construction-site-29174547/",
+    "pexels_id": 29174547,
+    "alt": "Blue dump truck unloading gravel at an outdoor construction site surrounded by autumn trees.",
+    "verified_as": "dump truck tipping gravel",
+    "tries": 1
+  },
+  "crew": {
+    "photographer": "Mikael Blomkvist",
+    "photographer_url": "https://www.pexels.com/@mikael-blomkvist",
+    "pexels_url": "https://www.pexels.com/photo/man-in-black-shirt-and-blue-denim-jeans-standing-beside-scaffolding-8961552/",
+    "pexels_id": 8961552,
+    "alt": "Two construction workers wearing hard hats work at an outdoor site, one with a wheelbarrow.",
+    "score": 9,
+    "rejected_candidates": 0
+  },
+  "land-clearing-2": {
+    "photographer": "Serhii Barkanov",
+    "pexels_url": "https://www.pexels.com/photo/excavator-in-serene-countryside-landscape-35598624/",
+    "pexels_id": 35598624,
+    "alt": "Yellow excavator amidst lush greenery and clear blue sky in tranquil rural setting.",
+    "verified_as": "YES, excavator clearing land with trees/brush visible"
+  },
+  "brush-clearing-2": {
+    "photographer": "Rodolfo Gaion",
+    "pexels_url": "https://www.pexels.com/photo/tree-maintenance-worker-using-chainsaw-in-londrina-30387769/",
+    "pexels_id": 30387769,
+    "alt": "Worker cutting tree branches with a chainsaw in Londrina, Brazil, performing city maintenance.",
+    "verified_as": "[fb 4] worker in orange shirt, green helmet cuts tree with ch"
+  },
+  "ditch-clearing-2": {
+    "photographer": "Joseph Russo",
+    "pexels_url": "https://www.pexels.com/photo/pipe-with-sewage-15954727/",
+    "pexels_id": 15954727,
+    "alt": "A rural drainage pipe pouring water into a natural ravine, surrounded by green vegetation.",
+    "verified_as": "YES, drainage channel"
+  },
+  "retaining-walls-2": {
+    "photographer": "Anastasia  Shuraeva",
+    "pexels_url": "https://www.pexels.com/photo/brown-rocks-on-green-grass-field-7671270/",
+    "pexels_id": 7671270,
+    "alt": "Serene landscape of a stone wall surrounded by greenery and lavender plants.",
+    "verified_as": "YES, stone wall in garden"
+  },
+  "masonry-2": {
+    "photographer": "Thanh Long B\u00f9i",
+    "pexels_url": "https://www.pexels.com/photo/bricklayer-working-on-construction-site-in-vietnam-33603170/",
+    "pexels_id": 33603170,
+    "alt": "Skilled bricklayer building a wall at an indoor construction site in H\u1ea3i Ph\u00f2ng, Vietnam.",
+    "verified_as": "brick"
+  },
+  "decks-2": {
+    "photographer": "\u0110\u1ed7 Huy Ho\u00e0ng",
+    "pexels_url": "https://www.pexels.com/photo/brown-wooden-patio-10847167/",
+    "pexels_id": 10847167,
+    "alt": "A spacious wooden deck with a view of a vibrant autumn backyard, perfect for relaxation.",
+    "verified_as": "wooden deck"
+  },
+  "lawn-care-2": {
+    "photographer": "Richard REVEL",
+    "pexels_url": "https://www.pexels.com/photo/man-riding-a-lawn-mower-vehicle-173552/",
+    "pexels_id": 173552,
+    "alt": "Adult mowing grass on a ride-on lawn mower in a garden setting.",
+    "verified_as": "Grass being mown"
+  },
+  "junk-removal-2": {
+    "photographer": "Jan van der Wolf",
+    "pexels_url": "https://www.pexels.com/photo/piles-of-rubble-against-corrugated-metal-fence-23414804/",
+    "pexels_id": 23414804,
+    "alt": "A pile of rubble in front of a large corrugated metal fence under a clear blue sky.",
+    "verified_as": "YES, PARTIAL (debris visible but not cleared)"
+  },
+  "property-maintenance-2": {
+    "photographer": "Aleksander Duma\u0142a",
+    "pexels_url": "https://www.pexels.com/photo/man-cutting-a-hedge-with-a-trimmer-in-the-garden-24595769/",
+    "pexels_id": 24595769,
+    "alt": "A man uses an electric trimmer to shape a garden hedge, showcasing precise landscaping skills.",
+    "verified_as": "[fb 2] man in blue shirt trimming green bush with hedge trimm"
+  },
+  "crew-2": {
+    "photographer": "Radik 2707",
+    "pexels_url": "https://www.pexels.com/photo/two-construction-workers-in-orange-hard-hats-sitting-on-a-pallet-17841794/",
+    "pexels_id": 17841794,
+    "alt": "Two construction workers in hard hats rest on a site, viewed from above.",
+    "verified_as": "two workers in hard hats on construction site"
+  }
+}
