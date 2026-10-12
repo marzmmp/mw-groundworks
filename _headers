@@ -28,24 +28,8 @@
 /404
   Cache-Control: public, max-age=0, must-revalidate
 
-# HTML must revalidate, or a phone-number change takes a week to reach
-# anyone. Pages serves these extensionless, so match the real paths.
-/
-  Cache-Control: public, max-age=0, must-revalidate
-/about
-  Cache-Control: public, max-age=0, must-revalidate
-/services
-  Cache-Control: public, max-age=0, must-revalidate
-/work
-  Cache-Control: public, max-age=0, must-revalidate
-/service-area
-  Cache-Control: public, max-age=0, must-revalidate
-/contact
-  Cache-Control: public, max-age=0, must-revalidate
-/404
-  Cache-Control: public, max-age=0, must-revalidate
-
 /*
+  Strict-Transport-Security: max-age=31536000
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: SAMEORIGIN
