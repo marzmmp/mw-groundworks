@@ -38,7 +38,9 @@ const json = (obj, status = 200) =>
 
 export async function onRequestPost({ request, env }) {
   const debug = new URL(request.url).searchParams.get('debug') === '1';
-  const override = new URL(request.url).searchParams.get('to');
+  // No recipient override: the shop is the only address this endpoint can mail.
+  // (A ?to= param used to be honoured here, which let anyone send mail from
+  // leads@true-site.tech to any address. Removed 2026-10-13.)
   const attempts = {};
 
   let body;
@@ -124,7 +126,7 @@ ${
   if (key) {
     const payload = {
       from: FROM,
-      to: [override || SHOP],
+      to: [SHOP],
       subject,
       text,
       html,
